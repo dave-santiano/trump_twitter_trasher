@@ -1,0 +1,22 @@
+<!doctype HTML>
+<html>
+ <script src="/socket.io/socket.io.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+
+  <script>
+    var socket = io.connect('http://localhost:8080');
+    socket.on('tweeet', function(tweet){
+      $('#tweetd').append(tweet+'<br>');
+    });
+    </script>
+  <head>
+    <title>
+      Index
+    </title>
+  </head>
+  <body>
+    <h1>
+      <div id = "tweetd"></div>
+    </h1>
+  </body>
+</html>

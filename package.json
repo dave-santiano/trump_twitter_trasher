@@ -1,0 +1,17 @@
+{
+  "name": "twitter_trasher",
+  "version": "1.0.0",
+  "description": "TEST",
+  "main": "server.js",
+  "dependencies": {
+    "socket.io": "^2.0.1",
+    "twit": "^2.2.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "dave",
+  "license": "ISC"
+}
