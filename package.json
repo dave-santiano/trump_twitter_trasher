@@ -1,17 +1,20 @@
 {
-  "name": "twitter_trasher",
+  "name": "trump_twitter_trasher",
   "version": "1.0.0",
-  "description": "TEST",
+  "description": "trump twitter trasher",
   "main": "server.js",
   "dependencies": {
+    "express": "^4.15.2",
+    "johnny-five": "^0.10.12",
+    "raspi-io": "^8.0.1",
+    "serialport": "^4.0.7",
     "socket.io": "^2.0.1",
     "twit": "^2.2.5"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "dave",
+  "author": "David Santiano",
   "license": "ISC"
 }

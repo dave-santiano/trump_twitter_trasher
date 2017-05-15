@@ -1,22 +1,171 @@
 <!doctype HTML>
 <html>
- <script src="/socket.io/socket.io.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-
-  <script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+  <script type = "text/javascript">
+    //This button should be able to send the tweets off to
+    //the arduino, but it needs to send it back to the server first.
+    var data1;
+    var data2;
+    var printing_status;
     var socket = io.connect('http://localhost:8080');
-    socket.on('tweeet', function(tweet){
-      $('#tweetd').append(tweet+'<br>');
+
+    $(document).ready(function(){
+      $('#tweetd').empty();
+      $('.button').click(function(e){
+      });
+
+      socket.on('tweeet', function(tweet){
+        $('#tweetd').append('<form method = "POST" action = "/" onsubmit = "return validateForm();"><button name = "butt' +tweet.index + '" class = "button" id = "button'+tweet.index +'"value = "tweet'+tweet.index +'">TRASH THIS TWEET</button></form>'+ '<div class = "tweet">' + tweet.tweet+ '</div>' + '<br>'+'<br>');
+       });
+      socket.on('printing_status', function(print){
+        printing_status = print;
+        printing_status = printing_status.replace(/\\r/g, '');
+        // socket.emit('print check', {print_check : 'checking for prints'});
+      });
     });
-    </script>
+
+    function validateForm(){
+        socket.emit('print check', {print_check : 'checking for prints'});
+        if(printing_status.trim() == "Y"){
+          alert("Still printing, please try again in a bit.");
+          return false;
+        }else{
+          alert("Printing your tweet!!!");
+          return true;
+        }
+      }
+
+  </script>
   <head>
-    <title>
-      Index
-    </title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+  <style>
+    @font-face{
+      font-family: 'Source Code Pro', monospace;
+      font-weight: normal;
+      font-style: normal;
+    }
+    body{
+      font-family: 'Source Code Pro';
+    }
+    .button{
+      font-family: 'Source Code Pro';
+      border-radius: 3px;
+      border: 2px solid black;
+      margin: auto;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
+      font-size: 24px;
+      width:75%;
+      --webkit-transition-duration: 0.6s;
+      transition-duration: 0.6s;
+    }
+    #button0{
+      background-color: #BF0A30;
+      border: none;
+      margin: auto;
+      color: white;
+    }
+    #button0:hover{
+      background-color: #000000;
+      color: white;
+    }
+    #button1{
+      background-color: #FFFFFF;
+      border: 2px solid black;
+      margin: auto;
+      color: black;
+    }
+    #button1:hover{
+      background-color: #000000;
+      color: white;
+    }
+    #button2{
+      background-color: #002868;
+      border: none;
+      margin: auto;
+      color: white;
+    }
+    #button2:hover{
+      background-color: #000000;
+      color: white;
+    }
+    #button3{
+      background-color: #BF0A30;
+      border: none;
+      margin: auto;
+      color: white;
+    }
+    #button3:hover{
+      background-color: #000000;
+      color: white;
+    }
+    #button4{
+      background-color: #FFFFFF;
+      border: none;
+      margin: auto;
+      border: 2px solid black;
+      color: black;
+    }
+    #button4:hover{
+      background-color: #000000;
+      color: white;
+    }
+    #button5{
+      background-color: #002868;
+      border: none;
+      margin: auto;
+      color: white;
+    }
+    #button5:hover{
+      background-color: #000000;
+      color: white;
+    }
+    h1.title{
+      font-size: 60px;
+      margin: auto;
+      border: none;
+      padding: 30px 0px 20px 0px;
+      width: 100%;
+    }
+
+    h2.subtitle{
+      margin:auto;
+      border:none;
+      padding: 0px 0px 20px 0px;
+    }
+    #wrapper{
+      width: 100%;
+      margin:0 auto;
+      padding:0;
+
+    }
+    #main_container{
+      width: 75%;
+      padding:0;
+      height:auto;
+      margin: 0 auto;
+    }
+    div.tweet{
+      font-size: 24px;
+      width:75%;
+      padding: 10px 0px 0px 0px;
+    }
+  </style>
+  <title>
+    Trump Tweet Trasher
+  </title>
   </head>
   <body>
-    <h1>
-      <div id = "tweetd"></div>
-    </h1>
+    <div id ="wrapper">
+      <div id = "main_container">
+        <h1 class = "title">TRUMP TWEET TRASHER</h1>
+        <h2 class = "subtitle">Pick one of Donald Trump's tweets to throw in the trash! (don't worry, it will be recycled)</h2>
+        <h1><div id = "tweetd"></div></h1>
+        </div>
+      </div>
   </body>
 </html>
