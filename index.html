@@ -14,24 +14,22 @@
       $('#tweetd').empty();
       $('.button').click(function(e){
       });
-
       socket.on('tweeet', function(tweet){
-        $('#tweetd').append('<form method = "POST" action = "/" onsubmit = "return validateForm();"><button name = "butt' +tweet.index + '" class = "button" id = "button'+tweet.index +'"value = "tweet'+tweet.index +'">TRASH THIS TWEET</button></form>'+ '<div class = "tweet">' + tweet.tweet+ '</div>' + '<br>'+'<br>');
+        $('#tweetd').append('<br>' + '<br>' + '<div class = "tweet">' + tweet.tweet+ '</div><br><form method = "POST" action = "/" onsubmit = "return validateForm();"><button name = "butt' +tweet.index + '" class = "button" id = "button'+tweet.index +'"value = "tweet'+tweet.index +'">TRASH THIS TWEET</button></form>');
        });
       socket.on('printing_status', function(print){
         printing_status = print;
         printing_status = printing_status.replace(/\\r/g, '');
-        // socket.emit('print check', {print_check : 'checking for prints'});
       });
     });
 
     function validateForm(){
         socket.emit('print check', {print_check : 'checking for prints'});
         if(printing_status.trim() == "Y"){
-          alert("Still printing, please try again in a bit.");
+          alert("Still printing, press OK and please try again in a bit.");
           return false;
         }else{
-          alert("Printing your tweet!!!");
+          alert("Printing your tweet, press OK to continue!!!");
           return true;
         }
       }
@@ -151,9 +149,11 @@
     }
     div.tweet{
       font-size: 24px;
-      width:75%;
+      width:90%;
+      margin:auto;
       padding: 10px 0px 0px 0px;
     }
+    div.main_heading{}
   </style>
   <title>
     Trump Tweet Trasher
@@ -162,8 +162,8 @@
   <body>
     <div id ="wrapper">
       <div id = "main_container">
-        <h1 class = "title">TRUMP TWEET TRASHER</h1>
-        <h2 class = "subtitle">Pick one of Donald Trump's tweets to throw in the trash! (don't worry, it will be recycled)</h2>
+          <h1 class = "title">TRUMP TWEET TRASHER</h1>
+          <h2 class = "subtitle">Pick one of Donald Trump's tweets to throw in the trash! (don't worry, it will be recycled)</h2>
         <h1><div id = "tweetd"></div></h1>
         </div>
       </div>
